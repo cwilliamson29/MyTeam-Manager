@@ -13,7 +13,9 @@ export const colorOfDay = (time: string) => {
     } else if (midDay.includes(t)) {
         return "midDay";
     } else if (evening.includes(t)) {
-        return "morning";
+        return "evening";
+    } else {
+        return "bg-black text-white"
     }
 };
 

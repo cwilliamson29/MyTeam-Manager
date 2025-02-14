@@ -6,7 +6,6 @@ export interface employeeTime {
 export interface employeeName {
     first: string;
     last: string;
-    reorder: boolean;
 }
 
 export interface employeeMeetings {
