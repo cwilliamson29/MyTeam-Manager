@@ -1,11 +1,29 @@
 import React from "react";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faArrowDown} from "@fortawesome/free-solid-svg-icons";
 
-function EmployeeListTitle() {
+interface Props {
+    setTimeReorder: () => void;
+}
+
+function EmployeeListTitle({setTimeReorder}: Props) {
+    let [titleClick, setTitleClick] = React.useState('')
+
+    const handleTitleclick = () => {
+        if (titleClick === ' title-buttons-clicked ') {
+            setTitleClick(' text-white ')
+            setTimeReorder()
+        } else {
+            setTitleClick(' title-buttons-clicked ')
+            setTimeReorder()
+        }
+    }
     return (
         <div
             className={"d-flex flex-row align-items-center justify-content-between bg-slate text-white title"}>
-            <div className="col flex-grow-1 h-100 time">
-                Time
+            <div className={"col flex-grow-1 h-100 time time-button " + titleClick}
+                 onClick={() => handleTitleclick()}>
+                Time <FontAwesomeIcon icon={faArrowDown} className={titleClick}/>
             </div>
             <div className="col-sm border-slate h-100 days">Work Days</div>
             <div className="col border-slate h-100 name">

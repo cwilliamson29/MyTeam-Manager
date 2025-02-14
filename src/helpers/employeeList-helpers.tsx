@@ -22,3 +22,7 @@ export const colorOfDay = (time: string) => {
 export const titleCase = (str: string): string => str.toLowerCase().split(' ').map(word => {
     return word.charAt(0).toUpperCase() + word.slice(1);
 }).join(' ');
+
+export const timeReorderList = (list: any[]) => {
+    list.toSorted((a, b) => a.hours.start < b.hours.start ? -1 : 1)
+}

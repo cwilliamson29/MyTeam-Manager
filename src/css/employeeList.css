@@ -57,6 +57,16 @@
     max-width: 16% !important;
 }
 
+.time-button {
+    background: none;
+    border: none;
+    font-weight: bold;
+}
+
+.title-buttons-clicked {
+    color: #70ace4 !important;
+}
+
 .days {
     max-width: 9% !important;
 }
