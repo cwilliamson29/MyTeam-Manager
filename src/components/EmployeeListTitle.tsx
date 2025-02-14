@@ -8,6 +8,9 @@ interface Props {
 
 function EmployeeListTitle({setTimeReorder}: Props) {
     let [titleClick, setTitleClick] = React.useState('')
+    let [nameClick, setNameClick] = React.useState(false)
+    let [firstNameClick, setFirstNameClick] = React.useState('');
+    let [lastNameClick, setLastNameClick] = React.useState('');
 
     const handleTitleclick = () => {
         if (titleClick === ' title-buttons-clicked ') {
@@ -16,6 +19,17 @@ function EmployeeListTitle({setTimeReorder}: Props) {
         } else {
             setTitleClick(' title-buttons-clicked ')
             setTimeReorder()
+        }
+    }
+    const handleNameClick = () => {
+        if (nameClick) {
+            setFirstNameClick(' text-white ');
+            setLastNameClick(' title-buttons-clicked ');
+            setNameClick(!nameClick)
+        } else {
+            setLastNameClick(' text-white ');
+            setFirstNameClick(' title-buttons-clicked ');
+            setNameClick(!nameClick)
         }
     }
     return (
@@ -27,7 +41,17 @@ function EmployeeListTitle({setTimeReorder}: Props) {
             </div>
             <div className="col-sm border-slate h-100 days">Work Days</div>
             <div className="col border-slate h-100 name">
-                Name
+                <div className="row">
+                    <div className={"col text-align-right" + firstNameClick} onClick={() => handleNameClick()}>
+                        <FontAwesomeIcon icon={faArrowDown} className={firstNameClick}/>
+                        By First
+                    </div>
+                    <div className={"col" + lastNameClick} onClick={() => handleNameClick()}>
+                        By Last
+                        <FontAwesomeIcon icon={faArrowDown} className={lastNameClick}/>
+                    </div>
+                </div>
+
             </div>
             <div className="col start border-slate h-100 email">Email</div>
             <div className="col border-slate h-100 EEID">EE ID</div>
