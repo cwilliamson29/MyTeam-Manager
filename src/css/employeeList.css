@@ -1,0 +1,49 @@
+.employee {
+    height: 35px;
+    font-weight: bold;
+    text-align: center;
+    font-size: 15px;
+}
+
+.title {
+    height: 35px;
+    font-weight: bold;
+    text-align: center;
+    font-size: 15px;
+    padding-top: 5px;
+}
+
+.pad {
+    padding-top: 5px;
+}
+
+.time {
+    max-width: 16% !important;
+}
+
+.days {
+    max-width: 9% !important;
+}
+
+.name {
+    font-weight: bold;
+}
+
+.EEID {
+    max-width: 10% !important;
+}
+
+.morning {
+    background: #ffe4c4;
+    color: #772e08;
+}
+
+.empWarnings {
+    color: white;
+    max-width: 10% !important;
+}
+
+.empWarningsNONE {
+    color: white;
+    max-width: 10% !important;
+}
