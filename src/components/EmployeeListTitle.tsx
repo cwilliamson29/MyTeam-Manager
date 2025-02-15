@@ -1,9 +1,10 @@
 import React from "react";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faArrowDown} from "@fortawesome/free-solid-svg-icons";
+import {EmployeeSorting} from "../interfaces/employeeInterface";
 
 interface Props {
-    setTimeReorder: () => void;
+    setTimeReorder: (sort: EmployeeSorting) => void;
 }
 
 function EmployeeListTitle({setTimeReorder}: Props) {
@@ -15,10 +16,10 @@ function EmployeeListTitle({setTimeReorder}: Props) {
     const handleTitleclick = () => {
         if (titleClick === ' title-buttons-clicked ') {
             setTitleClick(' text-white ')
-            setTimeReorder()
+            setTimeReorder({time: true, firstName: false})
         } else {
             setTitleClick(' title-buttons-clicked ')
-            setTimeReorder()
+            setTimeReorder({time: true, firstName: false})
         }
     }
     const handleNameClick = () => {
@@ -26,10 +27,12 @@ function EmployeeListTitle({setTimeReorder}: Props) {
             setFirstNameClick(' text-white ');
             setLastNameClick(' title-buttons-clicked ');
             setNameClick(!nameClick)
+            setTimeReorder({time: true, firstName: false})
         } else {
             setLastNameClick(' text-white ');
             setFirstNameClick(' title-buttons-clicked ');
             setNameClick(!nameClick)
+            setTimeReorder({time: true, firstName: false})
         }
     }
     return (

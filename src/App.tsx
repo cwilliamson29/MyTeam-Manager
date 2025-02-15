@@ -2,41 +2,58 @@ import './css/App.css'
 import './css/employeeList.css'
 import EmployeeList from "./components/EmployeeList";
 import EmployeeListTitle from "./components/EmployeeListTitle";
-import {dummyData} from "./helpers/dummyData";
+import {dummyData2} from "./helpers/dummyData";
 import React from "react";
+import {EmployeeSorting} from "./interfaces/employeeInterface";
 
 function App() {
+    let employeeArray = [];
+    for (let i = 0; i < dummyData2.length; i++) {
+        employeeArray.push(dummyData2[i])
+    }
+    console.log(employeeArray)
+
     let [timeReorder, setTimeReorder] = React.useState(false)
-    let [nameReorder, setNameReorder] = React.useState('last')
-    let [dummyList, setDummyList] = React.useState(dummyData)
+    let [nameReorder, setNameReorder] = React.useState(false)
+    let [dummyList, setDummyList] = React.useState(dummyData2)
 
-    const handleSort = () => {
-        setTimeReorder(!timeReorder);
-        let byHours = dummyData.toSorted((a, b) => a.hours.start < b.hours.start ? -1 : 1);
-        let byHoursFirstName = dummyData.toSorted((a, b) => {
-            if (a.hours.start > b.hours.start) return 1;
-            if (a.hours.start < b.hours.start) return -1;
-            if (a.name.first > b.name.first) return 1;
-            if (a.name.first < b.name.first) return -1;
-        });
-        let byHoursLastName = dummyData.toSorted((a, b) => {
-            if (a.hours.start > b.hours.start) return 1;
-            if (a.hours.start < b.hours.start) return -1;
-            if (a.name.last > b.name.last) return 1;
-            if (a.name.last < b.name.last) return -1;
-        });
 
-        if (timeReorder) {
-            setDummyList(dummyData);
-        } else if (timeReorder && nameReorder === 'first') {
-            setDummyList(byHoursFirstName)
-        } else if (timeReorder && nameReorder === 'last') {
-            setDummyList(byHoursLastName)
-        } else if (!timeReorder && nameReorder === 'first') {
-            setDummyList(byHours)
-        } else if (!timeReorder && nameReorder === 'last') {
-            setDummyList(byHours)
+    const handleSort = (sort: EmployeeSorting) => {
+        setTimeReorder(sort.time)
+        setNameReorder(sort.firstName)
+
+        if (sort.time) {
+            employeeArray.sort((a, b) => {
+                if (a.shiftStart > b.shiftStart) return 1;
+                if (a.shiftStart < b.shiftStart) return -1;
+                return 0;
+            });
+            setDummyList(employeeArray);
+        } else if (sort.time && sort.firstName) {
+            employeeArray.sort((a, b) => {
+                if (a.shiftStart > b.shiftStart) return 1;
+                if (a.shiftStart < b.shiftStart) return -1;
+                if (a.firstName > b.firstName) return 1;
+                if (a.firstName < b.firstName) return -1;
+                return 0;
+            });
+
+            setDummyList(employeeArray)
+        } else if (timeReorder && !nameReorder) {
+            employeeArray.sort((a, b) => {
+                if (a.shiftStart > b.shiftStart) return 1;
+                if (a.shiftStart < b.shiftStart) return -1;
+                if (a.lastName > b.lastName) return 1;
+                if (a.lastName < b.lastName) return -1;
+                return 0;
+            });
+            setDummyList(employeeArray)
+        } else if (!timeReorder && nameReorder) {
+            setDummyList(employeeArray)
+        } else if (!timeReorder && !nameReorder) {
+            setDummyList(employeeArray)
         }
+
     }
 
     return (
@@ -45,12 +62,15 @@ function App() {
             {dummyList.map((emp, i) => {
                 return <EmployeeList
                     id={i}
-                    time={emp.hours}
-                    days={emp.days}
-                    name={emp.name}
+                    shiftStart={emp.shiftStart}
+                    shiftEnd={emp.shiftEnd}
+                    days={emp.daysWorked}
+                    firstName={emp.firstName}
+                    lastName={emp.lastName}
                     email={emp.email}
                     EEID={emp.EEID}
                     meetings={emp.meetings}
+                    meetingsDay={emp.meetingsDay}
                     warnings={emp.warnings}
                 />
             })}
@@ -58,4 +78,4 @@ function App() {
     )
 }
 
-export default App
+export default App;
