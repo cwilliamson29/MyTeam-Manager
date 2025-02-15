@@ -1,5 +1,6 @@
 export let dummyData2 = [
     {
+        id: 1,
         shiftStart: "11:00",
         shiftEnd: "19:00",
         daysWorked: "--TWRFY",
@@ -12,6 +13,7 @@ export let dummyData2 = [
         warnings: "written"
     },
     {
+        id: 2,
         shiftStart: "11:00",
         shiftEnd: "19:00",
         daysWorked: "--TWRFY",
@@ -24,6 +26,7 @@ export let dummyData2 = [
         warnings: "written"
     },
     {
+        id: 3,
         shiftStart: "10:00",
         shiftEnd: "18:00",
         daysWorked: "--TWRFY",
@@ -36,6 +39,7 @@ export let dummyData2 = [
         warnings: "written"
     },
     {
+        id: 4,
         shiftStart: "13:00",
         shiftEnd: "21:00",
         daysWorked: "S-TW-FY",
@@ -48,6 +52,7 @@ export let dummyData2 = [
         warnings: "written"
     },
     {
+        id: 5,
         shiftStart: "06:00",
         shiftEnd: "15:00",
         daysWorked: "--TWRFY",
@@ -60,6 +65,7 @@ export let dummyData2 = [
         warnings: "written"
     },
     {
+        id: 6,
         shiftStart: "06:00",
         shiftEnd: "15:00",
         daysWorked: "--TWRFY",
@@ -71,6 +77,7 @@ export let dummyData2 = [
         meetingsDay: "wednesday",
         warnings: "written"
     }, {
+        id: 7,
         shiftStart: "06:00",
         shiftEnd: "15:00",
         daysWorked: "--TWRFY",

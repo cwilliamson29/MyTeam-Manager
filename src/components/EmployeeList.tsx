@@ -1,25 +1,12 @@
 import React from "react";
 import {colorOfDay, titleCase} from "../helpers/employeeList-helpers";
-
-interface Props {
-    id: number;
-    shiftStart: string;
-    shiftEnd: string;
-    days: string;
-    firstName: string;
-    lastName: string;
-    email: string;
-    EEID: string;
-    meetings: string;
-    meetingsDay: string;
-    warnings: string;
-}
+import {Employee} from "../interfaces/employeeInterface";
 
 function EmployeeList({
                           id,
                           shiftStart,
                           shiftEnd,
-                          days,
+                          daysWorked,
                           firstName,
                           lastName,
                           email,
@@ -27,7 +14,7 @@ function EmployeeList({
                           meetings,
                           meetingsDay,
                           warnings
-                      }: Props) {
+                      }: Employee) {
     const color = colorOfDay(shiftStart)
 
     return (
@@ -36,7 +23,7 @@ function EmployeeList({
             <div className="col flex-grow-1 h-100 time">
                 {shiftStart + " - " + shiftEnd}
             </div>
-            <div className={"border-" + color + " col-sm h-100 days"}>{days}</div>
+            <div className={"border-" + color + " col-sm h-100 days"}>{daysWorked}</div>
             <div className={"border-" + color + " col h-100 name"}>
                 {titleCase(`${firstName + " " + lastName}`)}
             </div>

@@ -13,6 +13,8 @@ function EmployeeListTitle({setTimeReorder}: Props) {
     let [timeClick, setTimeClick] = React.useState({css: '', sort: false})
     let [nameClick, setNameClick] = React.useState({css: ' title-buttons-clicked ', sort: true})
 
+    // handlTimeClick function that takes the properties as an object and stores them
+    // state and returns them to the main element with setTimeReorder
     const handleTimeclick = (args: SortClick) => {
         if (args.css === ' title-buttons-clicked ') {
             setTimeClick({css: args.css, sort: true})
@@ -22,7 +24,8 @@ function EmployeeListTitle({setTimeReorder}: Props) {
             setTimeReorder({time: args.sort, firstName: nameClick.sort})
         }
     }
-
+    // handleNameClick function that takes the properties as an object and stores them in
+    // state and returns them to the main element with setTimeReorder
     const handleNameClick = (args: SortClick) => {
         console.log(args)
         if (nameClick.css === '') {
@@ -33,6 +36,8 @@ function EmployeeListTitle({setTimeReorder}: Props) {
             setTimeReorder({time: timeClick.sort, firstName: args.sort})
         }
     }
+
+    // Return statement displays the blue bar at the top that allows to sort by time and first / last name
     return (
         <div
             className={"d-flex flex-row align-items-center justify-content-between bg-slate text-white title"}>
