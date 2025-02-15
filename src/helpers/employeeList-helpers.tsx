@@ -26,3 +26,12 @@ export const titleCase = (str: string): string => str.toLowerCase().split(' ').m
 export const timeReorderList = (list: any[]) => {
     list.toSorted((a, b) => a.hours.start < b.hours.start ? -1 : 1)
 }
+
+export const css = (args: string) => {
+    if (args === ' title-buttons-clicked ') {
+        return ''
+    } else {
+        return ' title-buttons-clicked '
+    }
+
+}

@@ -1,57 +1,55 @@
 import React from "react";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faArrowDown} from "@fortawesome/free-solid-svg-icons";
-import {EmployeeSorting} from "../interfaces/employeeInterface";
+import {EmployeeSorting, SortClick} from "../interfaces/employeeInterface";
+import {css} from "../helpers/employeeList-helpers";
 
 interface Props {
     setTimeReorder: (sort: EmployeeSorting) => void;
 }
 
 function EmployeeListTitle({setTimeReorder}: Props) {
-    let [titleClick, setTitleClick] = React.useState('')
-    let [nameClick, setNameClick] = React.useState(false)
-    let [firstNameClick, setFirstNameClick] = React.useState('');
-    let [lastNameClick, setLastNameClick] = React.useState('');
+    // State to change CSS styles and sort, uses the SortClick interface
+    let [timeClick, setTimeClick] = React.useState({css: '', sort: false})
+    let [nameClick, setNameClick] = React.useState({css: ' title-buttons-clicked ', sort: true})
 
-    const handleTitleclick = () => {
-        if (titleClick === ' title-buttons-clicked ') {
-            setTitleClick(' text-white ')
-            setTimeReorder({time: true, firstName: false})
+    const handleTimeclick = (args: SortClick) => {
+        if (args.css === ' title-buttons-clicked ') {
+            setTimeClick({css: args.css, sort: true})
+            setTimeReorder({time: args.sort, firstName: nameClick.sort})
         } else {
-            setTitleClick(' title-buttons-clicked ')
-            setTimeReorder({time: true, firstName: false})
+            setTimeClick({css: args.css, sort: true})
+            setTimeReorder({time: args.sort, firstName: nameClick.sort})
         }
     }
-    const handleNameClick = () => {
-        if (nameClick) {
-            setFirstNameClick(' text-white ');
-            setLastNameClick(' title-buttons-clicked ');
-            setNameClick(!nameClick)
-            setTimeReorder({time: true, firstName: false})
+
+    const handleNameClick = (args: SortClick) => {
+        console.log(args)
+        if (nameClick.css === '') {
+            setNameClick({css: args.css, sort: false})
+            setTimeReorder({time: timeClick.sort, firstName: args.sort})
         } else {
-            setLastNameClick(' text-white ');
-            setFirstNameClick(' title-buttons-clicked ');
-            setNameClick(!nameClick)
-            setTimeReorder({time: true, firstName: false})
+            setNameClick({css: args.css, sort: true})
+            setTimeReorder({time: timeClick.sort, firstName: args.sort})
         }
     }
     return (
         <div
             className={"d-flex flex-row align-items-center justify-content-between bg-slate text-white title"}>
-            <div className={"col flex-grow-1 h-100 time time-button " + titleClick}
-                 onClick={() => handleTitleclick()}>
-                Time <FontAwesomeIcon icon={faArrowDown} className={titleClick}/>
+            <div className={"col flex-grow-1 h-100 time time-button " + timeClick.css}
+                 onClick={() => handleTimeclick({css: css(timeClick.css), sort: !timeClick.sort})}>
+                Time <FontAwesomeIcon icon={faArrowDown} className={timeClick.css}/>
             </div>
             <div className="col-sm border-slate h-100 days">Work Days</div>
             <div className="col border-slate h-100 name">
-                <div className="row">
-                    <div className={"col text-align-right" + firstNameClick} onClick={() => handleNameClick()}>
-                        <FontAwesomeIcon icon={faArrowDown} className={firstNameClick}/>
+                <div className="row" onClick={() => handleNameClick({css: css(nameClick.css), sort: !nameClick.sort})}>
+                    <div className={"col text-align-right" + nameClick.css}>
+                        <FontAwesomeIcon icon={faArrowDown} className={css(nameClick.css)}/>
                         By First
                     </div>
-                    <div className={"col" + lastNameClick} onClick={() => handleNameClick()}>
+                    <div className={"col" + css(nameClick.css)}>
                         By Last
-                        <FontAwesomeIcon icon={faArrowDown} className={lastNameClick}/>
+                        <FontAwesomeIcon icon={faArrowDown} className={css(nameClick.css)}/>
                     </div>
                 </div>
 
