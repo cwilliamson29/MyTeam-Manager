@@ -31,8 +31,11 @@ function EmployeeList({
                           nameSort
                       }: Props) {
     const color = colorOfDay(shiftStart)
+    
+    // Arrange by First + Last ... or ... Last, First
     const firstLastName = titleCase(`${firstName + " " + lastName}`);
     const lastFirstName = titleCase(`${lastName + ", " + firstName}`);
+
     return (
         <div key={id}
              className={color + " d-flex flex-row align-items-center border-bottom border-dark justify-content-between employee"}>
@@ -46,7 +49,7 @@ function EmployeeList({
             <div className={"border-" + color + " col h-100 email"}>{email}</div>
             <div className={"border-" + color + " col h-100 EEID"}>{EEID.toUpperCase()}</div>
             <div className={"border-" + color + " col h-100 meetings"}>
-                {titleCase(meetings + " on " + meetingsDay)}
+                {meetings === "none" ? "" : titleCase(meetings + " on " + meetingsDay)}
             </div>
             <div
                 className={warnings === "none" ? "col h-100 empWarningsNONE" : "col h-100 empWarnings"}>

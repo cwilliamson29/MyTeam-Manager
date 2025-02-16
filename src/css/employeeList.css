@@ -63,6 +63,11 @@
     font-weight: bold;
 }
 
+.title-button:hover {
+    cursor: pointer;
+    color: #70ace4 !important;
+}
+
 .title-buttons-clicked {
     color: #70ace4 !important;
 }

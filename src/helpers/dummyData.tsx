@@ -60,8 +60,8 @@ export let dummyData2 = [
         lastName: "johnson",
         email: "jgoodall@work.com",
         EEID: "ccrcbland",
-        meetings: "bi-weekly",
-        meetingsDay: "wednesday",
+        meetings: "none",
+        meetingsDay: "none",
         warnings: "written"
     },
     {

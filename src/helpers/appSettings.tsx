@@ -1,5 +1,8 @@
 export let settings = {
     sortByTime: false,
-    sortByFirstName: false,
+    sortByFirstName: true,
     sortByLastName: false,
+    colorMode: 'dark',
+    hours: 24,
+
 }

@@ -1,5 +1,6 @@
 import './css/App.css'
 import './css/employeeList.css'
+import './css/settingsBar.css'
 import EmployeeList from "./components/EmployeeList";
 import EmployeeListTitle from "./components/EmployeeListTitle";
 import {dummyData2} from "./helpers/dummyData";
@@ -11,6 +12,7 @@ import {
     sortByTimeAndLastName,
     sortByTimeAndName
 } from "./helpers/employeeList-helpers";
+import SettingsBar from "./components/SettingsBar";
 
 function App() {
     let employeeArray = [];
@@ -44,6 +46,7 @@ function App() {
 
     return (
         <div className="App col d-md-flex flex-md-column justify-content-between">
+            <SettingsBar/>
             <EmployeeListTitle setTimeReorder={handleSort}/>
             {dummyList.map((emp, i) => {
                 return <EmployeeList
