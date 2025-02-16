@@ -13,27 +13,34 @@ import {
 } from "./helpers/employeeList-helpers";
 
 function App() {
-    // let employeeArray = [];
-    // for (let i = 0; i < dummyData2.length; i++) {
-    //     employeeArray.push(dummyData2[i])
-    // }
+    let employeeArray = [];
+    for (let i = 0; i < dummyData2.length; i++) {
+        employeeArray.push(dummyData2[i])
+    }
     let [dummyList, setDummyList] = React.useState(dummyData2)
-    console.log(dummyList)
+    //console.log(dummyList)
 
     const handleSort = (sort: EmployeeSorting) => {
         let array
         if (!sort.time && sort.firstName) {
-            array = sortByFirstName(dummyList);
-            setDummyList(array);
+            sortByFirstName(employeeArray);
+            setDummyList(employeeArray);
+            console.log('firstname only' + employeeArray)
         } else if (!sort.time && !sort.firstName) {
-            sortByLastName(dummyList);
-            setDummyList(dummyList)
+            sortByLastName(employeeArray);
+            setDummyList(employeeArray)
+            console.log('last name only' + employeeArray)
+
         } else if (sort.time && sort.firstName) {
-            sortByTimeAndName(dummyList);
-            setDummyList(dummyList)
+            sortByTimeAndName(employeeArray);
+            setDummyList(employeeArray)
+            console.log('time and firstname only' + employeeArray)
+
         } else if (sort.time && !sort.firstName) {
-            sortByTimeAndLastName(dummyList)
-            setDummyList(dummyList)
+            sortByTimeAndLastName(employeeArray)
+            setDummyList(employeeArray)
+            console.log('time and last name only' + employeeArray)
+
         }
 
     }
