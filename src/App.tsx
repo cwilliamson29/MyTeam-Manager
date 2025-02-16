@@ -17,30 +17,27 @@ function App() {
     for (let i = 0; i < dummyData2.length; i++) {
         employeeArray.push(dummyData2[i])
     }
-    let [dummyList, setDummyList] = React.useState(dummyData2)
+    let [dummyList, setDummyList] = React.useState(dummyData2);
+    let [nameSort, setNameSort] = React.useState(false);
     //console.log(dummyList)
 
     const handleSort = (sort: EmployeeSorting) => {
-        let array
         if (!sort.time && sort.firstName) {
+            setNameSort(sort.firstName);
             sortByFirstName(employeeArray);
             setDummyList(employeeArray);
-            console.log('firstname only' + employeeArray)
         } else if (!sort.time && !sort.firstName) {
+            setNameSort(sort.firstName);
             sortByLastName(employeeArray);
             setDummyList(employeeArray)
-            console.log('last name only' + employeeArray)
-
         } else if (sort.time && sort.firstName) {
+            setNameSort(sort.firstName);
             sortByTimeAndName(employeeArray);
             setDummyList(employeeArray)
-            console.log('time and firstname only' + employeeArray)
-
         } else if (sort.time && !sort.firstName) {
+            setNameSort(sort.firstName);
             sortByTimeAndLastName(employeeArray)
             setDummyList(employeeArray)
-            console.log('time and last name only' + employeeArray)
-
         }
 
     }
@@ -61,6 +58,7 @@ function App() {
                     meetings={emp.meetings}
                     meetingsDay={emp.meetingsDay}
                     warnings={emp.warnings}
+                    nameSort={nameSort}
                 />
             })}
         </div>

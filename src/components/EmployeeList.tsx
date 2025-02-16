@@ -1,6 +1,20 @@
 import React from "react";
 import {colorOfDay, titleCase} from "../helpers/employeeList-helpers";
-import {Employee} from "../interfaces/employeeInterface";
+
+interface Props {
+    id: number;
+    shiftStart: string;
+    shiftEnd: string;
+    daysWorked: string;
+    firstName: string;
+    lastName: string;
+    email: string;
+    EEID: string;
+    meetings: string;
+    meetingsDay: string;
+    warnings: string;
+    nameSort: boolean;
+}
 
 function EmployeeList({
                           id,
@@ -13,10 +27,12 @@ function EmployeeList({
                           EEID,
                           meetings,
                           meetingsDay,
-                          warnings
-                      }: Employee) {
+                          warnings,
+                          nameSort
+                      }: Props) {
     const color = colorOfDay(shiftStart)
-
+    const firstLastName = titleCase(`${firstName + " " + lastName}`);
+    const lastFirstName = titleCase(`${lastName + ", " + firstName}`);
     return (
         <div key={id}
              className={color + " d-flex flex-row align-items-center border-bottom border-dark justify-content-between employee"}>
@@ -25,7 +41,7 @@ function EmployeeList({
             </div>
             <div className={"border-" + color + " col-sm h-100 days"}>{daysWorked}</div>
             <div className={"border-" + color + " col h-100 name"}>
-                {titleCase(`${firstName + " " + lastName}`)}
+                {nameSort ? firstLastName : lastFirstName}
             </div>
             <div className={"border-" + color + " col h-100 email"}>{email}</div>
             <div className={"border-" + color + " col h-100 EEID"}>{EEID.toUpperCase()}</div>

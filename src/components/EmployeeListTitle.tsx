@@ -16,8 +16,8 @@ function EmployeeListTitle({setTimeReorder}: Props) {
     // handlTimeClick function that takes the properties as an object and stores them
     // state and returns them to the main element with setTimeReorder
     const handleTimeclick = (args: SortClick) => {
-        if (args.css === ' title-buttons-clicked ') {
-            setTimeClick({css: args.css, sort: true})
+        if (timeClick.sort) {
+            setTimeClick({css: args.css, sort: false})
             setTimeReorder({time: args.sort, firstName: nameClick.sort})
         } else {
             setTimeClick({css: args.css, sort: true})
@@ -27,8 +27,8 @@ function EmployeeListTitle({setTimeReorder}: Props) {
     // handleNameClick function that takes the properties as an object and stores them in
     // state and returns them to the main element with setTimeReorder
     const handleNameClick = (args: SortClick) => {
-        console.log(args)
-        if (nameClick.css === '') {
+        //console.log(args)
+        if (nameClick.sort) {
             setNameClick({css: args.css, sort: false})
             setTimeReorder({time: timeClick.sort, firstName: args.sort})
         } else {
