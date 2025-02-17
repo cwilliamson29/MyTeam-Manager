@@ -1,6 +1,6 @@
 import React from 'react';
 import {Button, Form, Tab, Tabs} from 'react-bootstrap';
-import {days, endTimes, startTimes} from "../helpers/appSettings";
+import {days, endTimes, meetingBasis, startTimes, warnings} from "../helpers/appSettings";
 
 interface Props {
     show: boolean;
@@ -44,7 +44,7 @@ function AddEmployee({show}: Props) {
                                 </div>
                             </div>
                         </div>
-                        <div className="d-flex flex-row justify-content-start p-1 secondary">
+                        <div className="d-flex flex-row justify-content-start p-1 mb-3 secondary">
                             <Form.Group className="mb-3 w-10 ms-1" controlId="firstName">
                                 <Form.Label>First Name</Form.Label>
                                 <Form.Control type="text" placeholder="Jane"/>
@@ -64,23 +64,52 @@ function AddEmployee({show}: Props) {
                         </div>
 
 
-                        <Form.Group className="mb-3" controlId="formBasicPassword">
-                            <Form.Label>Password</Form.Label>
-                            <Form.Control type="password" placeholder="Password"/>
-                        </Form.Group>
-                        <Form.Group className="mb-3" controlId="formBasicCheckbox">
-                            <Form.Check type="checkbox" label="Check me out"/>
-                        </Form.Group>
-                        <Button variant="primary" type="submit">
-                            Submit
-                        </Button>
+                        <div className="d-flex flex-row justify-content-start p-1 mb-3 secondary">
+                            <Form.Group className="mb-3 ms-2" controlId="meetings">
+                                <Form.Label>Meeting Frequency</Form.Label>
+                                <Form.Select id="meetings" className="w-10">
+                                    {meetingBasis.map((basis) => <option>{basis}</option>)}
+                                </Form.Select>
+                            </Form.Group>
+                            <Form.Group className="mb-3 ms-2" controlId="meetingsDay">
+                                <Form.Label>Meeting Day</Form.Label>
+                                <Form.Select id="meetings" className="w-10">
+                                    {days.map((day) => <option>{day}</option>)}
+                                </Form.Select>
+                            </Form.Group>
+                            <Form.Group className="mb-3 ms-2" controlId="warnings">
+                                <Form.Label>Warning</Form.Label>
+                                <Form.Select id="warning" className="w-10">
+                                    {warnings.map((warning) => <option>{warning}</option>)}
+                                </Form.Select>
+                            </Form.Group>
+                            <div className="d-flex align-items-center">
+                                <Button variant="primary" type="submit">
+                                    Add Team Member
+                                </Button>
+                            </div>
+
+                        </div>
+
                     </Form>
                 </Tab>
                 <Tab eventKey="addExcel" title="Add From Excel">
-                    Tab content for Profile
+                    <Form.Group controlId="formFileLg" className="mb-3">
+                        <Form.Label>Upload File for Batch processing</Form.Label>
+                        <Form.Control type="file" size="lg"/>
+                    </Form.Group>
+                    <Button variant="primary" type="submit">
+                        Upload File
+                    </Button>
                 </Tab>
                 <Tab eventKey="update" title="Update From Excel">
-                    Tab content for Profile
+                    <Form.Group controlId="formFileLg" className="mb-3">
+                        <Form.Label>Upload File for Batch processing and UPDATING current list</Form.Label>
+                        <Form.Control type="file" size="lg"/>
+                    </Form.Group>
+                    <Button variant="primary" type="submit">
+                        Upload File
+                    </Button>
                 </Tab>
             </Tabs>
         </div>
