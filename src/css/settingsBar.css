@@ -11,24 +11,11 @@
     color: var(--text-color-clicked);
 }
 
-.settings-drop-down {
-    /*transition: transform 2s ease;*/
-    width: 220px;
-    transform: translateX(-220px);
-    transition: transform 400ms ease-in;
-}
-
-.slideOut {
-    /*transform: translateY(100%);*/
-    transform: translateY(0);
-}
-
 .box {
     visibility: hidden;
     transition: visibility .5s, max-height .5s;
     max-height: 0;
     overflow: hidden;
-    /* additional style */
     padding: 0px 12px;
     margin-bottom: 8px;
 }
@@ -36,17 +23,24 @@
 .box.open {
     visibility: visible;
     /* Set max-height to something bigger than the box could ever be */
-    max-height: 100px;
+    max-height: 500px;
 }
 
-/*.box {*/
-/*    opacity: .5;*/
-/*    box-sizing: border-box;*/
-/*    transition: height 200ms 0ms, opacity 200ms 200ms;*/
-/*}*/
+.w-10 {
+    margin-right: 20px;
+    width: 150px !important;
+}
 
-/*.box.hide {*/
-/*    transition: height 200ms 200ms, opacity 200ms 0ms;*/
-/*    opacity: 0.0;*/
-/*    height: 0px;*/
-/*}*/
+.w-20 {
+    margin-left: 20px !important;
+    width: 250px !important;
+}
+
+.checkbox-1 {
+    font-size: 14px;
+}
+
+.secondary {
+    background-color: #393939;
+    border-radius: 10px;
+}

@@ -18,7 +18,7 @@ function SettingsBar() {
     }
     return (
         <div className="dark-mode">
-            <div className="d-flex justify-content-between pt-2 pb-2 dark-mode settings-bar">
+            <div className="d-flex justify-content-between pt-2 pb-2 settings-bar">
                 <div className="ps-3"><h4>MyTeam Manager</h4></div>
                 <div className="align-self-center settings-icon"
                      onClick={() => handleAddEmpClick()}>
