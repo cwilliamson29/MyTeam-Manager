@@ -85,7 +85,7 @@ function AddEmployee({show}: Props) {
                             </Form.Group>
                             <div className="d-flex align-items-center">
                                 <Button variant="primary" type="submit">
-                                    Add Team Member
+                                    Add Team Members
                                 </Button>
                             </div>
 
