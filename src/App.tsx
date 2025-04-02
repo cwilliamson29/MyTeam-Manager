@@ -1,70 +1,44 @@
-import './css/App.css'
-import './css/employeeList.css'
-import EmployeeList from "./components/EmployeeList";
 import EmployeeListTitle from "./components/EmployeeListTitle";
-import {dummyData2} from "./helpers/dummyData";
-import React from "react";
-import {EmployeeSorting} from "./interfaces/employeeInterface";
-import {
-    sortByFirstName,
-    sortByLastName,
-    sortByTimeAndLastName,
-    sortByTimeAndName
-} from "./helpers/employeeList-helpers";
+import { useEffect, useLayoutEffect } from "react";
+import TopBar from "./components/TopBar";
+import { DisplayEmployees } from "./components/DisplayEmployees";
+import { useAppLoad, useAppSettings, useEmployeeData } from "./state/store";
+import Footer from "./components/Footer";
 
 function App() {
-    let employeeArray = [];
-    for (let i = 0; i < dummyData2.length; i++) {
-        employeeArray.push(dummyData2[i])
-    }
-    let [dummyList, setDummyList] = React.useState(dummyData2)
-    //console.log(dummyList)
+	// AppLoad
+	const appLoad = useAppLoad.use.appLoad();
+	const setAppLoad = useAppLoad.use.setAppLoad();
+	// Settings state
+	const getAppSettings = useAppSettings.use.getAppSettings();
+	const settings = useAppSettings.use.appSettings();
+	// Employee state
+	const getEmployees = useEmployeeData.use.getEmployees();
 
-    const handleSort = (sort: EmployeeSorting) => {
-        let array
-        if (!sort.time && sort.firstName) {
-            sortByFirstName(employeeArray);
-            setDummyList(employeeArray);
-            console.log('firstname only' + employeeArray)
-        } else if (!sort.time && !sort.firstName) {
-            sortByLastName(employeeArray);
-            setDummyList(employeeArray)
-            console.log('last name only' + employeeArray)
+	useEffect(() => {
+		getEmployees();
+		getAppSettings();
+		setAppLoad(false);
+	}, []);
 
-        } else if (sort.time && sort.firstName) {
-            sortByTimeAndName(employeeArray);
-            setDummyList(employeeArray)
-            console.log('time and firstname only' + employeeArray)
+	useLayoutEffect(() => {
+		document.body.style.backgroundColor = `var(--background-color-${settings.colorMode})`;
+	}, [settings]);
 
-        } else if (sort.time && !sort.firstName) {
-            sortByTimeAndLastName(employeeArray)
-            setDummyList(employeeArray)
-            console.log('time and last name only' + employeeArray)
+	if (appLoad) {
+		return <div>Loading...</div>;
+	}
 
-        }
-
-    }
-
-    return (
-        <div className="App col d-md-flex flex-md-column justify-content-between">
-            <EmployeeListTitle setTimeReorder={handleSort}/>
-            {dummyList.map((emp, i) => {
-                return <EmployeeList
-                    id={i}
-                    shiftStart={emp.shiftStart}
-                    shiftEnd={emp.shiftEnd}
-                    daysWorked={emp.daysWorked}
-                    firstName={emp.firstName}
-                    lastName={emp.lastName}
-                    email={emp.email}
-                    EEID={emp.EEID}
-                    meetings={emp.meetings}
-                    meetingsDay={emp.meetingsDay}
-                    warnings={emp.warnings}
-                />
-            })}
-        </div>
-    )
+	// Usage
+	return (
+		<div className="container-fluid">
+			<TopBar />
+			<EmployeeListTitle />
+			<DisplayEmployees />
+			<Footer />
+			{/*<button onClick={() => AddDummyData()}>Add Dummy Data</button>*/}
+		</div>
+	);
 }
 
 export default App;

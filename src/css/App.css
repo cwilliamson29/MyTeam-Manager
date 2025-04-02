@@ -1,0 +1,76 @@
+@import "tailwindcss";
+
+@plugin "@tailwindcss/typography";
+
+:root {
+    --background-color-light: #d2d3db;
+    --text-color-light: #17171e;
+    --background-color-dark: #273037;
+    --text-color-dark: #ffffff;
+    --text-color-clicked: #70ace4;
+}
+
+body {
+    border-radius: 10px;
+}
+
+.dark-mode {
+    background-color: var(--background-color-dark);
+    color: var(--text-color-dark) !important;
+}
+
+.light-mode {
+    background-color: var(--background-color-light);
+    color: var(--text-color-light);
+}
+
+/*.titleBar {*/
+/*    app-region: drag;*/
+/*    height: 40px;*/
+/*    position: sticky;*/
+/*    top: 0;*/
+/*    left: 0;*/
+/*}*/
+
+.editor {
+    max-width: 100% !important;
+}
+
+.prose {
+    line-height: 10px;
+
+}
+
+.prose p {
+    margin-top: 8px !important;
+    margin-bottom: 12px !important;
+    line-height: 18px;
+}
+
+.prose ol {
+    margin-top: 8px !important;
+    margin-bottom: 12px !important;
+}
+
+.prose li {
+    line-height: 20px;
+    padding-top: 0;
+}
+
+.prose h1, .prose h2, .prose h3, .prose h4, .prose h5, .prose h6 {
+    margin-top: 1px;
+    margin-block: 0;
+}
+
+.help h3 {
+    font-size: 20px !important;
+    font-weight: bolder;
+    margin-top: 15px;
+    padding-top: 1px;
+    width: 100%;
+}
+
+.help p {
+    border-bottom: 1px solid gray;
+    padding-bottom: 15px;
+}

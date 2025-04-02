@@ -1,4 +1,5 @@
 import {Employee} from "../interfaces/employeeInterface";
+import {civiTimes, militaryTimes} from "./appSettings";
 
 export const colorOfDay = (time: string) => {
     // Determining time of day for CSS coloring
@@ -11,40 +12,82 @@ export const colorOfDay = (time: string) => {
 
     // Determines CSS return statement
     if (morning.includes(t)) {
-        return "morning";
+        return "bg-amber-200";
     } else if (midDay.includes(t)) {
-        return "midDay";
+        return "bg-emerald-200";
     } else if (evening.includes(t)) {
-        return "evening";
+        return "bg-indigo-400";
     } else {
-        return "bg-black text-white"
+        return "bg-black text-white";
     }
 };
 // titleCase function returns the string in "This Format"
-export const titleCase = (str: string): string => str.toLowerCase().split(' ').map(word => {
-    return word.charAt(0).toUpperCase() + word.slice(1);
-}).join(' ');
-
-export const timeReorderList = (list: any[]) => {
-    list.toSorted((a, b) => a.hours.start < b.hours.start ? -1 : 1)
-}
+export const titleCase = (str: string): string =>
+    str
+        .toLowerCase()
+        .split(" ")
+        .map((word) => {
+            return word.charAt(0).toUpperCase() + word.slice(1);
+        })
+        .join(" ");
 
 // css helper function goes to EmployeeListTitle and easily allows switching between to strings without error
 export const css = (args: string) => {
-    if (args === ' title-buttons-clicked ') {
-        return ''
+    if (args === " text-[#70ace4] ") {
+        return "";
     } else {
-        return ' title-buttons-clicked '
+        return " text-[#70ace4] ";
     }
+};
 
-}
+// Convert to 24 hour times
+export const timeConvertT024 = (val: string) => {
+    //console.log(val)
+    let checkAM = val.toLowerCase().includes("am");
 
-interface SortByTimeAndNameParams {
-    array: [];
-}
+    if (val === "12:00 PM" || val === "12:30 PM") {
+        return val.slice(0, 5);
+    } else if (val === "12:00 AM" || val === "12:30 AM") {
+        return "00:" + val.slice(3, 5);
+    } else if (checkAM) {
+        if (
+            val === "10:00 AM" ||
+            val === "10:30 AM" ||
+            val === "11:00 AM" ||
+            val === "11:30 AM"
+        ) {
+            return val.slice(0, 5);
+        } else {
+            const v = "0" + val;
+            return v.slice(0, 5);
+        }
+    } else {
+        for (let i = 0; i < civiTimes.length; i++) {
+            //console.log(val + " " + civiTimes[i] + ': ' + `${val === civiTimes[i]}`)
+            if (val === civiTimes[i]) {
+                return militaryTimes[i];
+            }
+        }
+    }
+};
+// Convert to 24 hour times
+export const timeConvertT012 = (val: string) => {
+    if (val === "12:00" || val === "12:30") {
+        return val + " PM";
+    } else if (val === "00:00" || val === "00:30") {
+        return "12:" + val.slice(3, 5) + " AM";
+    } else {
+        for (let i = 0; i < militaryTimes.length; i++) {
+            if (val === militaryTimes[i]) {
+                return civiTimes[i];
+            }
+        }
+    }
+};
 
 // Sort by time and firstname
 export const sortByTimeAndName = (array: Employee[]) => {
+    //console.log(array)
     array.sort((a, b) => {
         if (a.shiftStart > b.shiftStart) return 1;
         if (a.shiftStart < b.shiftStart) return -1;
@@ -52,7 +95,8 @@ export const sortByTimeAndName = (array: Employee[]) => {
         if (a.firstName < b.firstName) return -1;
         return 0;
     });
-}
+    //console.log(array)
+};
 // Sort by time and firstname
 export const sortByTimeAndLastName = (array: Employee[]) => {
     array.sort((a, b) => {
@@ -62,7 +106,7 @@ export const sortByTimeAndLastName = (array: Employee[]) => {
         if (a.lastName < b.lastName) return -1;
         return 0;
     });
-}
+};
 // Sort by first name only
 export const sortByFirstName = (array: Employee[]) => {
     array.sort((a, b) => {
@@ -70,8 +114,7 @@ export const sortByFirstName = (array: Employee[]) => {
         if (a.firstName < b.firstName) return -1;
         return 0;
     });
-    return array;
-}
+};
 
 //Sort by last name only
 export const sortByLastName = (array: Employee[]) => {
@@ -80,4 +123,4 @@ export const sortByLastName = (array: Employee[]) => {
         if (a.lastName < b.lastName) return -1;
         return 0;
     });
-}
+};
